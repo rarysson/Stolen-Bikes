@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 
 import { DepartmentHeader } from './components/DepartmentHeader'
+import { Filters } from './components/Filters'
 
-const Wrapper = styled.div`
+const AppWrapper = styled.div`
   max-width: 1250px;
   margin: 0 auto;
   padding: 50px 0;
@@ -10,9 +11,10 @@ const Wrapper = styled.div`
 
 function App() {
   return (
-    <Wrapper>
+    <AppWrapper>
       <DepartmentHeader />
-    </Wrapper>
+      <Filters style={{ marginTop: '25px' }} />
+    </AppWrapper>
   )
 }
 
