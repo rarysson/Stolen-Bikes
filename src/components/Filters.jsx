@@ -10,7 +10,7 @@ const FormContainer = styled.form`
   display: flex;
 `
 const SearchInput = styled.input`
-  width: 250px;
+  width: 225px;
   height: 30px;
   border-radius: 7px;
   border: 1px solid black;
