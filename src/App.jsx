@@ -28,7 +28,8 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       try {
-        setTotalStolenBikes(await fetchTotalStolenBikes())
+        const data = await fetchTotalStolenBikes()
+        setTotalStolenBikes(data)
         setMaxPages(Math.floor(totalStolenBikes / 10))
       } catch (e) {
         setHasError(true)
@@ -42,7 +43,8 @@ function App() {
     async function fetchData() {
       try {
         setIsLoading(true)
-        setBikes(await fetchBikes(currentPage))
+        const data = await fetchBikes(currentPage)
+        setBikes(data)
       } catch (e) {
         setHasError(true)
       } finally {
