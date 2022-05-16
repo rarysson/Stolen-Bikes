@@ -37,7 +37,7 @@ function App() {
     }
 
     fetchData()
-  }, [])
+  }, [totalStolenBikes])
 
   useEffect(() => {
     async function fetchData() {
