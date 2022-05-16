@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { BikesDashboard } from './components/BikesDashboard'
 import { DepartmentHeader } from './components/DepartmentHeader'
 import { Filters } from './components/Filters'
+import { Pagination } from './components/Pagination'
 
 import { fetchTotalStolenBikes, fetchBikes } from './services/fetch'
 
@@ -18,6 +19,7 @@ const ErrorMessage = styled.p`
 
 function App() {
   const [totalStolenBikes, setTotalStolenBikes] = useState(0)
+  const [maxPages, setMaxPages] = useState(1)
   const [bikes, setBikes] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [hasError, setHasError] = useState(false)
@@ -27,6 +29,7 @@ function App() {
     async function fetchData() {
       try {
         setTotalStolenBikes(await fetchTotalStolenBikes())
+        setMaxPages(Math.floor(totalStolenBikes / 10))
       } catch (e) {
         setHasError(true)
       }
@@ -63,15 +66,7 @@ function App() {
       return <p>No results</p>
     }
 
-    return (
-      <BikesDashboard
-        totalStolenBikes={totalStolenBikes}
-        bikes={bikes}
-        onPaginate={(page) => {
-          setCurrentPage(page)
-        }}
-      />
-    )
+    return <BikesDashboard totalStolenBikes={totalStolenBikes} bikes={bikes} />
   }
 
   return (
@@ -79,6 +74,16 @@ function App() {
       <DepartmentHeader />
       <Filters style={{ marginTop: '25px', marginBottom: '25px' }} />
       <MainContent />
+      {maxPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          maxPages={maxPages}
+          style={{ marginTop: '25px' }}
+          onPaginate={(page) => {
+            setCurrentPage(page)
+          }}
+        />
+      )}
     </AppWrapper>
   )
 }
